@@ -84,5 +84,3 @@ POSTGRES_DB=ConstructionQA
 python scripts/predict_risk.py
 python scripts/monthly_closing.py
 ```
-
-
