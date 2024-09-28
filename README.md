@@ -49,17 +49,25 @@ This project demonstrates a comprehensive approach to **Construction Quality Ass
 git clone https://github.com/junelus/Construction-Quality-Assurance-Dashboard.git
 cd Construction-Quality-Assurance-Dashboard
 ```
-# Create a virtual environment
+#### Create a virtual environment
+```bash
 python -m venv venv
+```
 
-# Activate the virtual environment
-# On Windows:
+#### Activate the virtual environment
+##### On Windows:
+```bash
 venv\Scripts\activate
-# On macOS/Linux:
+```
+#### On macOS/Linux:
+```bash
 source venv/bin/activate
+```
 
-# Install the required packages
+#### Install the required packages
+```bash
 pip install -r requirements.txt
+```
 
 ### 2. Set Up PostgreSQL Database and add credentials to .env file
 
