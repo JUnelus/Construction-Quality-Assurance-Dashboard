@@ -41,29 +41,40 @@ This project demonstrates a comprehensive approach to **Construction Quality Ass
 
 ---
 
-## Project Setup
+## Installation
 
-### 1. **Database Setup (PostgreSQL)**
+### 1. Clone the Repository
 
-1. Install PostgreSQL and create the `ConstructionQA` database.
-2. Run the provided SQL script to create the `Projects`, `QualityMetrics`, and `Risks` tables.
-3. Populate the database with the sample data:
-   - `Projects`: Stores project details (name, budget, completion status).
-   - `QualityMetrics`: Tracks inspection data and defects found.
-   - `Risks`: Categorizes risks and defines mitigation plans.
+```bash
+git clone https://github.com/junelus/Construction-Quality-Assurance-Dashboard.git
+cd Construction-Quality-Assurance-Dashboard
+```
+# Create a virtual environment
+python -m venv venv
 
-### 2. **Power BI Dashboard Setup**
+# Activate the virtual environment
+# On Windows:
+venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
 
-1. Open **Power BI Desktop** and connect to the PostgreSQL database.
-2. Import the tables (`Projects`, `QualityMetrics`, `Risks`) and create visuals.
-3. Build the following dashboard components:
-   - KPIs (Total Projects, Passed Inspections, Budget Utilization)
-   - Project Completion Status Chart
-   - Risk Breakdown Donut Chart
-   - Quality Metrics Analysis Charts (Defects by Project, Passed Inspections Over Time)
+# Install the required packages
+pip install -r requirements.txt
 
-### 3. **Machine Learning Model Setup (Python)**
+### 2. Set Up PostgreSQL Database and add credentials to .env file
 
-1. Install the required Python libraries:
-   ```bash
-   pip install pandas scikit-learn psycopg2
+```bash
+POSTGRES_USER=your_postgres_username
+POSTGRES_PASSWORD=your_postgres_password
+POSTGRES_HOST=localhost
+POSTGRES_DB=ConstructionQA
+```
+
+### 3. Run the Python Scripts
+
+```bash
+python scripts/predict_risk.py
+python scripts/monthly_closing.py
+```
+
+

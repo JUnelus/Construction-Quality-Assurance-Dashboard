@@ -1,20 +1,19 @@
+import os
 import pandas as pd
-import psycopg2
+from sqlalchemy import create_engine
+from dotenv import load_dotenv
 
-# Establish connection to PostgreSQL
-conn = psycopg2.connect(
-    host="localhost",  # Replace with your DB host
-    database="ConstructionQA",
-    user="postgres",
-    password="PostGres924!"
-)
+# Load environment variables from .env file
+load_dotenv()
+
+# Create an SQLAlchemy engine
+db_url = f"postgresql://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@{os.getenv('POSTGRES_HOST')}/{os.getenv('POSTGRES_DB')}"
+engine = create_engine(db_url)
 
 # Load data into pandas DataFrames
-projects_df = pd.read_sql_query("SELECT * FROM Projects", conn)
-quality_metrics_df = pd.read_sql_query("SELECT * FROM QualityMetrics", conn)
-risks_df = pd.read_sql_query("SELECT * FROM Risks", conn)
-
-conn.close()
+projects_df = pd.read_sql_query("SELECT * FROM Projects", engine)
+quality_metrics_df = pd.read_sql_query("SELECT * FROM QualityMetrics", engine)
+risks_df = pd.read_sql_query("SELECT * FROM Risks", engine)
 
 # Merge dataframes on project_id
 merged_df = pd.merge(projects_df, quality_metrics_df, on="project_id", how="left")
@@ -64,7 +63,7 @@ unique_classes = sorted(set(y_test))
 target_names = [le.classes_[cls] for cls in unique_classes]
 
 # Print classification report
-print(classification_report(y_test, y_pred, target_names=target_names))
+print(classification_report(y_test, y_pred, target_names=target_names, zero_division=0))
 
 # Save the Model and Integrate with Power BI
 import joblib
